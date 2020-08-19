@@ -1,0 +1,31 @@
+USERNAME : ADMIN
+PASSWORD : ADMIN:admin1
+
+
+###################   mainpage logic   ###########################
+
+{% for i in allManga %}
+
+<span style="color:red;">{{i}}</span>
+
+{% endfor %}
+
+###################################################################
+###################   mangaChapterPage logic   ####################
+
+{% for i in chapter_Images %}
+
+<span style="color:red;">{{i}}</span>
+
+{% endfor %}
+
+###################################################################
+###################   mangarPage logic   ##########################
+
+{% for i in chapters %}
+
+<span style="color:red;">{{i}}</span>
+
+{% endfor %}
+
+###################################################################

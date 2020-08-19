@@ -1,0 +1,45 @@
+{% include '_header.html' %}
+
+<div id="FULLpage" class="container-fluid row" style="height:100vh;">
+
+  {% include '_std_partials.html' %}
+
+
+  <div class="col-9 my-3" >
+    <h3>{{manga.title}}</h3>
+    <hr>
+    <div class="container">
+    <div class="row">
+      <div class="col-sm-5">
+        <img src="{{manga.profile.url}}" alt="" class="col-sm-5 img img-thumbnail bg-light img-fluid">
+      </div>
+      <div class="col-sm-2 float-left align-center py-0 px-0 ml-3 mt-5" style="">
+        <span class="btn btn-info"> recent chapter <!-- DISPLAY CH no--> </span>
+      </div>
+      <div class="col-sm-2 float-left align-center py-0 px-0 ml-3 mt-5" style="">
+        <span class="btn btn-warning">&#9734; Favourite</span>
+      </div>
+      <div class="col-10 my-2">
+        <b>Description :</b> {{manga.summary}}
+      </div>
+
+
+
+
+      <div class="col-12">
+        <hr>
+        <div class="container-fluid row-fluid">
+          {% for i in chapters %}
+
+            <a href="{% url 'chapter' manga.id i %}" class="col-sm-1 my-1 btn btn-light btn-outline-dark">{{i}}</a>
+
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+{% include '_footer.html' %}

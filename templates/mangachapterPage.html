@@ -1,0 +1,42 @@
+{% include '_header.html' %}
+
+<style media="screen">
+  body{
+    background-color:black;
+  }
+</style>
+
+    <div class="container">
+      <div class=" justify-content-center">
+      {% if previous is -1 %}
+      <div name="previous" class="text-center" style="visibility:hidden;">
+        <a href="#" class="col-8 btn btn-warning"> Previous</a>
+      </div>
+      {% else %}
+        <div name="previous" class="text-center">
+          <a href="{% url 'chapter' manga.id previous %}" class="col-8 btn btn-warning"> Previous</a>
+        </div>
+      {% endif %}
+
+
+        <div class="">
+          {% for i in chapter_Images %}
+
+          <img src="some source" alt="{{i}}">
+
+          {% endfor %}
+        </div>
+        {% if next is -1 %}
+        <div name="Next" class="text-center" style="visibility:hidden;">
+          <a href="#" class="col-8 btn btn-warning"> Next</a>
+        </div>
+        {% else %}
+          <div name="Next" class="text-center">
+            <a href="{% url 'chapter' manga.id next %}" class="col-8 btn btn-warning"> Next</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+
+{% include '_footer.html' %}
