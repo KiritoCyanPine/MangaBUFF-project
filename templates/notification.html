@@ -1,0 +1,54 @@
+{% include '_header.html' %}
+<div id="FULLpage" class="container-fluid row" style="height:100vh;">
+
+  {% include '_std_partials.html' %}
+
+  <div class="col-9 justify-content-center" style="color:#FFF;">
+
+    <div name="Untracked" class="container my-5">
+      <div class="card bg-secondary  px-3 py-3">
+        <h3>Untracker Manga</h3>
+        <hr>
+        <div class="container">
+          {% if SOMEVARIABLE%}
+              {% for i in SOMEVARIABLE %}
+
+                <a href="" class="expand-on-hover"><div class="card rounded bg-light px-2 y-2">
+                  The Directory {{i}} has been removed or moved
+                </div></a>
+
+              {% endfor %}
+          {% else %}
+          Everything Looks Fine ...!
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div name="Unregistered" class="container my-5">
+      <div class="card bg-secondary  px-3 py-3">
+        <h3>Unregistered Manga</h3>
+        <hr>
+        <div class="container">
+          {% if SOMEVARIABLE%}
+              {% for i in SOMEVARIABLE %}
+
+                <a href="" class="expand-on-hover"><div class="card rounded bg-light px-2 y-2">
+                  The Directory {{i}} is in the Manga Folder
+                </div></a>
+
+              {% endfor %}
+          {% else %}
+          Everything Looks Fine ...!
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+
+{% include '_footer.html' %}

@@ -23,5 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', mangatitles.views.MainPage, name="MainPage"),
     path('mangatitle/<int:manga_id>', mangatitles.views.mangatitle, name="mangaPages"),
+    path('mangatitle/fav/<int:manga_id>', mangatitles.views.favour, name="Favourite"),
+    path('notify/', mangatitles.views.notify, name="notify"),
     path('mangatitle/<int:manga_id>/<str:chapter_id>',mangatitles.views.mangaChapter,name="chapter"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

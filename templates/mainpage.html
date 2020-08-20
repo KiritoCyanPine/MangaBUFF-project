@@ -8,7 +8,7 @@
 
   <div class="col-9 my-3" >
     <div class="container">
-    <div class="row justify-content-between start">
+    <div class="row justify-content-start">
 
       {% for i in allManga %}
 
@@ -17,49 +17,7 @@
             <div name="image" class="">
               <img src="{{i.profile.url}}" class="img img-fluid img-thumbnail rounded">
             </div>
-            <div name="title" class="text-center">
-              {{i.title}}
-            </div>
-          </a>
-        </div>
-
-      {% endfor %}
-      {% for i in allManga %}
-
-        <div id="card" class="card col-md-2 rounded btn btn-outline-dark my-2 mx-3">
-          <a href="{% url 'mangaPages' i.id %}">
-            <div name="image" class="">
-              <img src="{{i.profile.url}}" class="img img-fluid img-thumbnail rounded">
-            </div>
-            <div name="title" class="text-center">
-              {{i.title}}
-            </div>
-          </a>
-        </div>
-
-      {% endfor %}
-      {% for i in allManga %}
-
-        <div id="card" class="card col-md-2 rounded btn btn-outline-dark my-2 mx-3">
-          <a href="{% url 'mangaPages' i.id %}">
-            <div name="image" class="">
-              <img src="{{i.profile.url}}" class="img img-fluid img-thumbnail rounded">
-            </div>
-            <div name="title" class="text-center">
-              {{i.title}}
-            </div>
-          </a>
-        </div>
-
-      {% endfor %}
-      {% for i in allManga %}
-
-        <div id="card" class="card col-md-2 rounded btn btn-outline-dark my-2 mx-3">
-          <a href="{% url 'mangaPages' i.id %}">
-            <div name="image" class="">
-              <img src="{{i.profile.url}}" class="img img-fluid img-thumbnail rounded">
-            </div>
-            <div name="title" class="text-center">
+            <div name="title" class="text-center h-100">
               {{i.title}}
             </div>
           </a>

@@ -4,35 +4,55 @@
   body{
     background-color:black;
   }
+  
 </style>
-
+<div class="float-left based-on-screen">
+    <a href="{% url 'MainPage' %}" class="btn my-2 btn-danger">
+       Go to MainPage</a><br>
+    <a href="{% url 'mangaPages' manga_id %}" class="btn my-2" style="background: linear-gradient(16deg, rgba(254,200,44,1) 0%, rgba(69,233,195,1) 49%, rgba(210,95,255,1) 100%);color:#FFF;">
+       Go back to Manga Index</a><br>
+    {% if previous is -1 %}
+    <span href="{% url 'chapter' manga_id previous %}" class="btn my-2 btn-secondary">
+       This is the First chapter </span><br>
+    {% else %}
+    <a href="{% url 'chapter' manga_id previous %}" class="btn my-2 btn-warning">
+       <<<&nbsp;&nbsp;&nbsp; Prevoius Chapter </a><br>
+    {% endif %}
+    {% if next is -1 %}
+    <span href="{% url 'chapter' manga_id next %}" class="btn my-2 btn-secondary">
+       This is the Last Chapter</span><br>
+    {% else %}
+    <a href="{% url 'chapter' manga_id next %}" class="btn my-2 btn-primary">
+       Next Chapter &nbsp;&nbsp;&nbsp;>>></a><br>
+    {% endif %}
+</div>
     <div class="container">
       <div class=" justify-content-center">
       {% if previous is -1 %}
-      <div name="previous" class="text-center" style="visibility:hidden;">
-        <a href="#" class="col-8 btn btn-warning"> Previous</a>
+      <div name="Next" class="text-center my-3" style="visibility:hidden;">
+        <span class="col-8 btn btn-error"><<< &nbsp;&nbsp;&nbsp;Previous</span>
       </div>
       {% else %}
-        <div name="previous" class="text-center">
-          <a href="{% url 'chapter' manga.id previous %}" class="col-8 btn btn-warning"> Previous</a>
+        <div name="previous" class="text-center my-3">
+          <a href="{% url 'chapter' manga_id previous %}" class="col-8 btn btn-warning"><<<&nbsp;&nbsp;&nbsp; Previous</a>
         </div>
       {% endif %}
 
 
-        <div class="">
+        <div class="align-center text-center justify-content-center">
           {% for i in chapter_Images %}
 
-          <img src="some source" alt="{{i}}">
+          <img src="{{i}}" alt="{{i}}" class="img img-fluid align-center w-75">
 
           {% endfor %}
         </div>
         {% if next is -1 %}
-        <div name="Next" class="text-center" style="visibility:hidden;">
-          <a href="#" class="col-8 btn btn-warning"> Next</a>
+        <div name="Next" class="text-center my-3" style="visibility:hidden;">
+          <span class="col-8 btn btn-error"> Next</span>
         </div>
         {% else %}
-          <div name="Next" class="text-center">
-            <a href="{% url 'chapter' manga.id next %}" class="col-8 btn btn-warning"> Next</a>
+          <div name="Next" class="text-center my-3">
+            <a href="{% url 'chapter' manga_id next %}" class="col-8 btn btn-primary"> Next&nbsp;&nbsp;&nbsp; >>></a>
           </div>
         {% endif %}
       </div>

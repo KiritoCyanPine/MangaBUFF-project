@@ -23,6 +23,7 @@
 <link rel="mask-icon" href="/docs/4.5/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
 <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon.ico">
 <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
+<meta content="width=device-width, initial-scale=1" name="viewport" />
 <meta name="theme-color" content="#563d7c">
 
 
@@ -37,11 +38,21 @@
         user-select: none;
       }
 
-      @media (min-width: 768px) {
+      .based-on-screen {
+        position:static;
+        padding-left: 50px;
+      }
+
+      @media (min-width: 786px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
+
+        .based-on-screen {
+          position:fixed;
+        }
       }
+
 
 
             @media screen and (prefers-reduced-motion: no-preference) {
@@ -50,7 +61,8 @@
                 scroll-behavior: smooth;
               }
             }
-      body{
+
+body{
 
         background: #ffe6f7;
       }
