@@ -23,6 +23,17 @@ def MainPage(request):
     print(allManga)
     return render(request, "mainPage.html", context)
 
+def Favourite_manga(request):
+    allManga = MangaTitles.objects.all()
+    FavManga = MangaTitles.objects.filter(fav__gte=True)
+    context = {
+    'allManga': FavManga,
+    'msg':"Got Out and make Some Favourite anime",
+    }
+    print(allManga)
+    return render(request, "mainPage.html", context)
+
+
 def favour(request,manga_id):
     manganame = get_object_or_404(MangaTitles, pk = manga_id)
     manganame.fav = not manganame.fav
@@ -62,10 +73,11 @@ def notify(request):
     allDirs = [ name for name in os.listdir("D:/Manga") if os.path.isdir(os.path.join("D:/Manga", name)) ]
     registeredDirectoryAddresses = [j.directory_address for j in MangaTitles.objects.all()]
     print("registeredDirectoryAddresses",registeredDirectoryAddresses)
+    print("allDirs", allDirs)
     Registered = []
     for i in allDirs:
         #print("if DIr name  :",Anime_dir+i)
-        if "D:\\\Manga\\"+i in registeredDirectoryAddresses:
+        if "D:\\Manga\\"+i in registeredDirectoryAddresses:
             Registered.append(i)
     print(" Registered" , Registered)
     Deleted_Manga = []
@@ -103,6 +115,8 @@ def notify(request):
 
     print(" Deleted_Manga" , Deleted_Manga)
     context = {
-
+    'Unregistered':Unregistered,
+    'Unregistered_links':Unregistered_links,
+    'Deleted_Manga':Deleted_Manga,
     }
     return render(request , 'notification.html', context)

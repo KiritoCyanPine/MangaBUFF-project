@@ -14,8 +14,8 @@ class MangaTitles(models.Model):
     current_chapter = models.CharField(max_length = 200,blank = True)
     summary = models.TextField()
     directory_address = models.CharField(max_length=250)
-    fav = models.BooleanField(blank = True)
-    count = models.IntegerField(blank = True)
+    fav = models.BooleanField(blank = True , default = False)
+    count = models.IntegerField(blank = True ,default = 0)
 
     def __str__(self):
 
@@ -54,9 +54,6 @@ class MangaTitles(models.Model):
             mangaChapters = -1
         return mangaChapters
 
-    def images_in_Folder(self):
-
-        return
 
 def atoi(text):
     return int(text) if text.isdigit() else text

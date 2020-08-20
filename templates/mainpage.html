@@ -10,6 +10,7 @@
     <div class="container">
     <div class="row justify-content-start">
 
+      {% if allManga %}
       {% for i in allManga %}
 
         <div id="card" class="card col-md-2 rounded btn btn-outline-dark my-2 mx-3 shadow-sm">
@@ -24,7 +25,11 @@
         </div>
 
       {% endfor %}
-
+      {% else %}
+      <div class="h-100 text-center text-secondary">
+        <h1><b>" {{msg}} "</b></h1>
+      </div>
+      {% endif %}
 
 
 

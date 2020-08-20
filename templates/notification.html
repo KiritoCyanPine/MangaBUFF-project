@@ -9,13 +9,21 @@
       <div class="card bg-secondary  px-3 py-3">
         <h3>Untracker Manga</h3>
         <hr>
-        <div class="container">
-          {% if SOMEVARIABLE%}
-              {% for i in SOMEVARIABLE %}
+        <div class="container" style="color:black;">
+          {% if Deleted_Manga %}
+              {% for i in Deleted_Manga  %}
 
-                <a href="" class="expand-on-hover"><div class="card rounded bg-light px-2 y-2">
-                  The Directory {{i}} has been removed or moved
-                </div></a>
+                <div class="expand-on-hover">
+                  <div class="card rounded bg-light px-2 py-3 my-2 container row-fluid">
+                    <div class="col-8">
+                      The Directory {{i}} has been removed or moved
+                    </div>
+                    <div class="col-3">
+                      <a href="{% url 'admin:index' %}mangatitles/mangatitles/{{i.id}}/change/" target="_blank"  class=" btn-primary rounded px-3 py-1 mx-1" style="color:#ffffff;">Config</a>
+                      <a href="{% url 'admin:index' %}mangatitles/mangatitles/{{i.id}}/delete/"  class=" btn-danger rounded px-3 py-1 mx-1" style="color:#ffffff;">Delete</a>
+                    </div>
+                  </div>
+                </div>
 
               {% endfor %}
           {% else %}
@@ -29,13 +37,20 @@
       <div class="card bg-secondary  px-3 py-3">
         <h3>Unregistered Manga</h3>
         <hr>
-        <div class="container">
-          {% if SOMEVARIABLE%}
-              {% for i in SOMEVARIABLE %}
+        <div class="container" style="color:black;">
+          {% if Unregistered%}
+              {% for i,j in Unregistered_links %}
 
-                <a href="" class="expand-on-hover"><div class="card rounded bg-light px-2 y-2">
-                  The Directory {{i}} is in the Manga Folder
-                </div></a>
+                <div class="expand-on-hover">
+                  <div class="card rounded bg-light px-2 py-3 my-2 container row-fluid">
+                    <div class="col-8">
+                      The Directory {{i}} is in the Manga Folder
+                    </div>
+                    <div class="col-3">
+                      <a href="{% url 'admin:index' %}mangatitles/mangatitles/add?directory_address={{j}}&title={{i}}" target="_blank"  class=" btn-primary rounded px-3 py-1 mx-1" style="color:#ffffff;">Add it Now</a>
+                    </div>
+                  </div>
+                </div>
 
               {% endfor %}
           {% else %}

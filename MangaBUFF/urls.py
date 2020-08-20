@@ -22,6 +22,7 @@ import mangatitles.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', mangatitles.views.MainPage, name="MainPage"),
+    path('Favourite/', mangatitles.views.Favourite_manga, name="Favourite_manga"),
     path('mangatitle/<int:manga_id>', mangatitles.views.mangatitle, name="mangaPages"),
     path('mangatitle/fav/<int:manga_id>', mangatitles.views.favour, name="Favourite"),
     path('notify/', mangatitles.views.notify, name="notify"),
