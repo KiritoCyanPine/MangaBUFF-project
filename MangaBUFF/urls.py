@@ -27,4 +27,6 @@ urlpatterns = [
     path('mangatitle/fav/<int:manga_id>', mangatitles.views.favour, name="Favourite"),
     path('notify/', mangatitles.views.notify, name="notify"),
     path('mangatitle/<int:manga_id>/<str:chapter_id>',mangatitles.views.mangaChapter,name="chapter"),
+
+    path('MangaBird/',mangatitles.views.open_manga_bird, name="MangaBird"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

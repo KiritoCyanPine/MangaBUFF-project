@@ -10,7 +10,6 @@ link_Gen_prefix = 'http://localhost:11112/'
 class MangaTitles(models.Model):
     title = models.CharField(max_length = 200)
     profile = models.ImageField(upload_to= 'images/profile/')
-    genres = models.CharField(max_length=250)
     current_chapter = models.CharField(max_length = 200,blank = True)
     summary = models.TextField()
     directory_address = models.CharField(max_length=250)

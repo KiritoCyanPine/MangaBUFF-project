@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, HttpResponse, redirect
 from .models import MangaTitles
 from django.contrib import messages
 import os
+import subprocess
+
 
 
 # Create your views here.
@@ -66,20 +68,21 @@ def mangaChapter(request,manga_id,chapter_id):
     }
     return render(request , "mangachapterPage.html", context)
 
+def open_manga_bird(request):
+    os.startfile (r"C:/Users/Debasish Nandi/Desktop/Manga Reader.lnk")
+    return redirect("MainPage")
+
 
 def notify(request):
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     mangas = MangaTitles.objects.all()
     allDirs = [ name for name in os.listdir("D:/Manga") if os.path.isdir(os.path.join("D:/Manga", name)) ]
     registeredDirectoryAddresses = [j.directory_address for j in MangaTitles.objects.all()]
-    print("registeredDirectoryAddresses",registeredDirectoryAddresses)
-    print("allDirs", allDirs)
     Registered = []
     for i in allDirs:
         #print("if DIr name  :",Anime_dir+i)
         if "D:\\Manga\\"+i in registeredDirectoryAddresses:
             Registered.append(i)
-    print(" Registered" , Registered)
     Deleted_Manga = []
 
     Avoid_folder = []
@@ -101,19 +104,19 @@ def notify(request):
     Unregistered = set(allDirs) - set(Registered)
     Unregistered = set(Unregistered) - set(Avoid_folder)
     Unregistered = list(Unregistered)
+    for i in Unregistered:
+        if i[0] == "#":
+            Unregistered.remove(i)
     Unregistered.sort()
     Unregistered_add = ["D:\\Manga\\"+i for i in Unregistered ]
     Unregistered_links = zip(Unregistered,Unregistered_add)
 
     for j in MangaTitles.objects.all():
-        if j.manga_folder() == "-1":
+        if j.manga_folder() == -1:
             Deleted_Manga.append(get_object_or_404(MangaTitles, pk=j.id))
     with open(BASE_DIR+"\\Dir_Avoid.qaw", 'r') as csv_file:
         csv_reader = csv_file.read()
     csv_reader = csv_reader.replace(",","\n")
-    print(" Unregistered" , Unregistered)
-
-    print(" Deleted_Manga" , Deleted_Manga)
     context = {
     'Unregistered':Unregistered,
     'Unregistered_links':Unregistered_links,
