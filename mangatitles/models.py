@@ -1,9 +1,10 @@
 from django.db import models
 import os
 import re
+import socket
 
 
-link_Gen_prefix = 'http://localhost:11112/'
+#link_Gen_prefix = 'http://localhost:11112/'
 
 
 # Create your models here.
@@ -25,8 +26,13 @@ class MangaTitles(models.Model):
             img_list  = os.listdir(self.directory_address)
             last_Dir = self.directory_address.split("\\")
             last_Dir = last_Dir[-1]
-            print("count ", self.count)
-            img_list.sort(key=natural_keys)
+            try:
+                file = open("hostCompIP.qaw",'r')
+                link_Gen_prefix = file.readline()
+                file.close()
+            except:
+                link_Gen_prefix = 'http://'+str(socket.gethostbyname(socket.getfqdn()))+':11112/'
+            img_list.sort(key=rough_keys)
             #print(img_list)
             if self.count == 0 or self.count == None:
                 firstCh = img_list[0]
@@ -55,7 +61,10 @@ class MangaTitles(models.Model):
 
 
 def atoi(text):
-    return int(text) if text.isdigit() else text
+    return float(text) if text.isdigit() else text
 
 def natural_keys(text):
+    return [ atoi(c) for c in re.split('(\d+)',text.split("_")[0]) ]           # Original ::[ atoi(c) for c in re.split('(\d+)',text) ]
+
+def rough_keys(text):
     return [ atoi(c) for c in re.split('(\d+)',text) ]

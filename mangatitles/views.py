@@ -1,10 +1,18 @@
 from django.shortcuts import render, get_object_or_404, HttpResponse, redirect
 from .models import MangaTitles
 from django.contrib import messages
-import os
-import subprocess
+import os, time
+import subprocess, threading, socket
 
-
+############################  Threading Function  ##############################
+def writeIP():
+    file = open("hostCompIP.qaw",'w')
+    file.write( 'http://'+str(socket.gethostbyname(socket.getfqdn()))+':11112/')
+    file.close()
+    print("PING: IP REFRESH")
+    time.sleep(10)
+    return writeIP()
+################################################################################
 
 # Create your views here.
 def mangatitle(request,manga_id):
@@ -18,11 +26,16 @@ def mangatitle(request,manga_id):
     return render(request, "mangaPage.html", context)
 
 def MainPage(request):
+    t1 = threading.Thread(target=writeIP)
+    t1.start()
+    msgIP = " Access mangaBUFF on IP Address : "
+    IPaddress = str(socket.gethostbyname(socket.getfqdn()))+":8000"
     allManga = MangaTitles.objects.all()
     context = {
     'allManga': allManga,
+    'msgIP':msgIP,
+    'IPaddress':IPaddress,
     }
-    print(allManga)
     return render(request, "mainPage.html", context)
 
 def Favourite_manga(request):
@@ -30,7 +43,7 @@ def Favourite_manga(request):
     FavManga = MangaTitles.objects.filter(fav__gte=True)
     context = {
     'allManga': FavManga,
-    'msg':"Got Out and make Some Favourite anime",
+    'msg':"Go Out and make Some Favourite anime",
     }
     print(allManga)
     return render(request, "mainPage.html", context)
@@ -83,6 +96,11 @@ def notify(request):
         #print("if DIr name  :",Anime_dir+i)
         if "D:\\Manga\\"+i in registeredDirectoryAddresses:
             Registered.append(i)
+        if os.path.exists("D:\\Manga\\"+i+"\\.nomedia"):
+            pass
+        else:
+            create = open("D:\\Manga\\"+i+"\\.nomedia",'w')
+            create.close()
     Deleted_Manga = []
 
     Avoid_folder = []

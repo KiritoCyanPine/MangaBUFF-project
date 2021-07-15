@@ -7,6 +7,13 @@
 
 
   <div class="col-9 my-3" >
+
+    {% if msgIP %}
+    <div class="jusify-content-center bg-success text-light text-center px-4 py-2 rounded">
+      {{msgIP}} <a href="http://{{IPaddress}}" class="text-light">http://{{IPaddress}}</a>
+    </div>
+    <br /><br /><br />
+    {% endif %}
     <div class="container">
     <div class="row justify-content-start">
 
@@ -46,6 +53,7 @@
 
 
     </div>
+
   </div>
   </div>
 </div>

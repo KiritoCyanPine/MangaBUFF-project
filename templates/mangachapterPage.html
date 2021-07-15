@@ -1,28 +1,62 @@
 {% include '_header.html' %}
-
-<style media="screen">
+<script type="text/javascript">
+  function Start(){
+  var root = document.documentElement;
+    root.style.setProperty('--screen-x', window.screenX)
+    root.style.setProperty('--screen-y', window.screenY)
+    console.log("PRINTED");
+}
+</script>
+<style media="screen" onload="Start">
   body{
     background-color:black;
   }
-  
+
+  @media (max-width :600px) {
+
+      .col-xl-10 {
+            width: 120%;
+
+       }
+      .container {
+        width : 114%;
+        position: relative;
+        left: -30px;
+      }
+      .top-on-screen{
+        position: relative;
+        margin-top: 0px;
+        left: 0;
+        z-index:99;
+      }
+      .top-on-screen-mobile{
+        visibility:hidden;
+        position: relative;
+        margin-top: 0px;
+        left: 0;
+        z-index:99;
+      }
+
+}
+
 </style>
 <div class="float-left based-on-screen">
-    <a href="{% url 'MainPage' %}" class="btn my-2 btn-danger">
+    <a href="{% url 'MainPage' %}" class="btn my-2 btn-danger top-on-screen">
        Go to MainPage</a><br>
-    <a href="{% url 'mangaPages' manga_id %}" class="btn my-2" style="background: linear-gradient(16deg, rgba(254,200,44,1) 0%, rgba(69,233,195,1) 49%, rgba(210,95,255,1) 100%);color:#FFF;">
+    <a href="{% url 'mangaPages' manga_id %}" class="btn my-2 top-on-screen" style="background: linear-gradient(16deg, rgba(254,200,44,1) 0%, rgba(69,233,195,1) 49%, rgba(210,95,255,1) 100%);color:#FFF;">
        Go back to Manga Index</a><br>
     {% if previous is -1 %}
-    <span href="{% url 'chapter' manga_id previous %}" class="btn my-2 btn-secondary">
+    <span href="{% url 'chapter' manga_id previous %}" class="btn my-2 btn-secondary top-on-screen-mobile">
        This is the First chapter </span><br>
     {% else %}
-    <a href="{% url 'chapter' manga_id previous %}" class="btn my-2 btn-warning">
+    <a href="{% url 'chapter' manga_id previous %}" class="btn my-2 btn-warning top-on-screen-mobile">
        <<<&nbsp;&nbsp;&nbsp; Prevoius Chapter </a><br>
     {% endif %}
     {% if next is -1 %}
-    <span href="{% url 'chapter' manga_id next %}" class="btn my-2 btn-secondary">
+    <span href="{% url 'chapter' manga_id next %}" class="btn my-2 btn-secondary top-on-screen-mobile">
        This is the Last Chapter</span><br>
     {% else %}
-    <a href="{% url 'chapter' manga_id next %}" class="btn my-2 btn-primary">
+    <a href="{% url 'chapter' manga_id next %}" class="btn my-2 btn-primary top-on-screen-mobile">
        Next Chapter &nbsp;&nbsp;&nbsp;>>></a><br>
     {% endif %}
 </div>
@@ -34,7 +68,7 @@
       </div>
       {% else %}
         <div name="previous" class="text-center my-3">
-          <a href="{% url 'chapter' manga_id previous %}" class="col-8 btn btn-warning"><<<&nbsp;&nbsp;&nbsp; Previous</a>
+          <a id="previousChap" href="{% url 'chapter' manga_id previous %}" class="col-8 btn btn-warning"><<<&nbsp;&nbsp;&nbsp; Previous</a>
         </div>
       {% endif %}
 
@@ -42,7 +76,7 @@
         <div class="align-center text-center justify-content-center">
           {% for i in chapter_Images %}
 
-          <img src="{{i}}" alt="{{i}}" class="img img-fluid align-center w-75">
+          <img src="{{i}}" alt="{{i}}" class="img img-fluid align-center col-xl-10">
 
           {% endfor %}
         </div>
@@ -52,11 +86,32 @@
         </div>
         {% else %}
           <div name="Next" class="text-center my-3">
-            <a href="{% url 'chapter' manga_id next %}" class="col-8 btn btn-primary"> Next&nbsp;&nbsp;&nbsp; >>></a>
+            <a id="nextChap" href="{% url 'chapter' manga_id next %}" class="col-8 btn btn-primary"> Next&nbsp;&nbsp;&nbsp; >>></a>
           </div>
         {% endif %}
       </div>
     </div>
+
+<script type="text/javascript">
+  let keysDown = {};
+window.onkeydown = function(e) {
+  keysDown[e.key] = true;
+
+  if (keysDown["Control"] && keysDown["ArrowLeft"]) {
+    //do what you want when control and a is pressed for example
+    var a = document.getElementById("previousChap").href;
+    window.open(a, "_self");
+  }
+  else if( keysDown["Control"] && keysDown["ArrowRight"] ){
+    var b = document.getElementById("nextChap").href;
+    window.open(b,"_self");
+  }
+}
+
+window.onkeyup = function(e) {
+  keysDown[e.key] = false;
+}
+</script>
 
 
 {% include '_footer.html' %}

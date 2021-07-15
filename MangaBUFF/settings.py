@@ -25,7 +25,7 @@ SECRET_KEY = '04ms=aeplzt-a@&(3u@#=$2+kuk45ms02klkqu*s)!zd=)e1md'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -118,7 +118,7 @@ USE_TZ = True
 # Where to Search for the static Files
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'AnimeBUFF/static'),
+    os.path.join(BASE_DIR, 'MangaBUFF/static'),
 ]
 
 
